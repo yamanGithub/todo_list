@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      ToDo List
+    </ion-title>
+    <ion-buttons end>
+      <button ion-button *ngIf="!reorderIsEnable" (click)="toggleReorder()"> <ion-icon name="build"></ion-icon></button>
+      <button ion-button *ngIf="reorderIsEnable" (click)="toggleReorder()"><ion-icon name="done-all"></ion-icon></button>
+      <button ion-button (click)="openTodoAlert()">
+          <ion-icon name="add-circle"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-list  [reorder]="reorderIsEnable" (ionItemReorder)="itemReorder($event)"> 
+    <ion-item-sliding *ngFor="let i of todo; let todoIndex = index"> 
+    <ion-item>{{i}}</ion-item>
+    <ion-item-options side="right">
+      <button ion-button color="danger" (click)="delete(todoIndex)">
+        <ion-icon name="trash" ></ion-icon>
+      </button>
+    </ion-item-options>
+    <ion-item-options side="left">
+        <button ion-button color="primary" (click)="editTodo(todoIndex)">
+          <ion-icon name="edit" ></ion-icon>
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+
+  <ion-fab right bottom>
+    <button ion-fab (click)="gotToHome()">
+      <ion-icon name="archive"></ion-icon>
+    </button>
+  </ion-fab>
+</ion-content>
